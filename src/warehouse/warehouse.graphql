@@ -1,10 +1,10 @@
 type Query {
-    getWH( input: FindWHIdData! ): WarehouseResponse!
-    getAllWH: AllWarehouseResponse!
+    getWh( input: WarehouseRequest! ): WarehouseResponse!
+    getAllWh: AllWarehouseResponse!
 }
 
 type Mutation{
-    addWH( input: addWHData! ): Warehouse!
+    addWh( input: CreateWarehouseRequest! ): WarehouseResponse!
 }
 
 type Warehouse {
@@ -15,23 +15,23 @@ type Warehouse {
 
 type AllWarehouseResponse {
     warehouses: [Warehouse]
-    errors: Error
+    error: Error
 }
 
 type WarehouseResponse {
     warehouse: Warehouse
-    errors: Error
+    error: Error
 }
 
 type Error {
     message: String!
 }
 
-input addWHData {
+input CreateWarehouseRequest {
     name: String!
     location: String!
 }
 
-input FindWHIdData {
+input WarehouseRequest {
     id: Int!
 }
