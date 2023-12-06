@@ -12,8 +12,8 @@ import { protobufPackage } from 'src/warehouse/warehouse.pb';
       transport: Transport.GRPC,
       options: {
         url: '0.0.0.0:5001',
-      package: protobufPackage,
-      protoPath: join('node_modules/protos/proto/warehouse.proto')
+        package: protobufPackage,
+        protoPath: join('node_modules/protos/proto/warehouse.proto')
       },
     },
   ]),],
