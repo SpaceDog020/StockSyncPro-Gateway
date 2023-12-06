@@ -1,0 +1,44 @@
+type Query {
+    getProductById( input: getProductByIdRequest! ): getProductByIdResponse!
+    getAllProducts: GetAllProductsResponse!
+}
+
+type Mutation{
+    addProduct( input: AddProductRequest! ): AddProductResponse!
+}
+
+type Error {
+    message: String!
+}
+
+type Product {
+    id: String!
+    name: String!
+    description: String!
+    price: Int!
+}
+
+input getProductByIdRequest {
+    id: String!
+}
+
+input AddProductRequest {
+    name: String!
+    description: String!
+    price: Int!
+}
+
+type getProductByIdResponse {
+    product: Product
+    error: Error
+}
+
+type GetAllProductsResponse {
+    products: [Product]
+    error: Error
+}
+
+type AddProductResponse {
+    product: Product
+    error: Error
+}
