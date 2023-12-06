@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { WarehouseModule } from './warehouse/warehouse.module';
+import { UserModule } from './user/user.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -16,11 +17,9 @@ import { WarehouseModule } from './warehouse/warehouse.module';
         }
       }
     }),
-    ConfigModule.forRoot({
-      envFilePath: ['.env'],
-      isGlobal: true,
-    }),
-    WarehouseModule,
+    UserModule,
+    ProductModule,
+    WarehouseModule
   ],
   providers: [],
 })
