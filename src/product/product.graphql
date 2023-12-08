@@ -5,6 +5,8 @@ type Query {
 
 type Mutation{
     addProduct( input: AddProductRequest! ): AddProductResponse!
+    deleteProduct( input: DeleteProductRequest! ): DeleteProductResponse!
+    updateProduct( input: UpdateProductRequest! ): UpdateProductResponse!
 }
 
 type Error {
@@ -18,6 +20,10 @@ type Product {
     price: Int!
 }
 
+
+
+
+
 input getProductByIdRequest {
     id: String!
 }
@@ -27,6 +33,20 @@ input AddProductRequest {
     description: String!
     price: Int!
 }
+
+input DeleteProductRequest {
+    id: String!
+}
+
+input UpdateProductRequest {
+    id: String!
+    name: String
+    description: String
+    price: Int
+}
+
+
+
 
 type getProductByIdResponse {
     product: Product
@@ -39,6 +59,16 @@ type GetAllProductsResponse {
 }
 
 type AddProductResponse {
+    product: Product
+    error: Error
+}
+
+type DeleteProductResponse {
+    isDeleted: Boolean
+    error: Error
+}
+
+type UpdateProductResponse{
     product: Product
     error: Error
 }
