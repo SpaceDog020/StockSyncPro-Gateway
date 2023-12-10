@@ -2,7 +2,7 @@ import { Inject, OnModuleInit } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable, map } from 'rxjs';
-import { Warehouse, AllWarehouseResponse, WarehouseServiceClient, WarehouseResponse, WarehouseRequest, CreateWarehouseRequest } from 'src/warehouse/warehouse.pb';
+import { Warehouse, AllWarehouseResponse, WarehouseServiceClient, WarehouseResponse, WarehouseRequest, CreateWarehouseRequest, ProductWHRequest, ProductWHResponse, DeleteProductWHRequest, UpdateWarehouseRequest } from 'src/warehouse/warehouse.pb';
 
 @Resolver('Warehouse')
 export class WarehouseResolver implements OnModuleInit {
@@ -30,5 +30,29 @@ export class WarehouseResolver implements OnModuleInit {
   addWh(@Args('input') input: CreateWarehouseRequest): Observable<WarehouseResponse> {
     console.log('[.] addWh');
     return this.warehouseService.addWh(input);
+  }
+
+  @Mutation('addProductToWh')
+  addProductToWh(@Args('input') input: ProductWHRequest): Observable<ProductWHResponse> {
+    console.log('[.] addProductToWh');
+    return this.warehouseService.addProductToWh(input);
+  }
+
+  @Mutation('deleteProductWh')
+  deleteProductWh(@Args('input') input: DeleteProductWHRequest): Observable<ProductWHResponse> {
+    console.log('[.] deleteProductWh');
+    return this.warehouseService.deleteProductWh(input);
+  }
+
+  @Mutation('updateWh')
+  updateWh(@Args('input') input: UpdateWarehouseRequest): Observable<WarehouseResponse> {
+    console.log('[.] updateWh');
+    return this.warehouseService.updateWh(input);
+  }
+
+  @Mutation('updateStock')
+  updateStock(@Args('input') input: ProductWHRequest): Observable<ProductWHResponse> {
+    console.log('[.] updateStock');
+    return this.warehouseService.updateStock(input);
   }
 }

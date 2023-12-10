@@ -1,37 +1,63 @@
 type Query {
-    getWh( input: WarehouseRequest! ): WarehouseResponse!
-    getAllWh: AllWarehouseResponse!
+  getWh(input: WarehouseRequest!): WarehouseResponse!
+  getAllWh: AllWarehouseResponse!
 }
 
-type Mutation{
-    addWh( input: CreateWarehouseRequest! ): WarehouseResponse!
+type Mutation {
+  addWh(input: CreateWarehouseRequest!): WarehouseResponse!
+  addProductToWh(input: ProductWHRequest!): ProductWHResponse!
+  deleteProductWh(input: DeleteProductWHRequest!): ProductWHResponse!
+  updateWh(input: UpdateWarehouseRequest!): WarehouseResponse!
+  updateStock(input: ProductWHRequest!): ProductWHResponse!
 }
 
 type Warehouse {
-    id: Int!
-    name: String!
-    location: String!
+  id: Int!
+  name: String!
+  location: String!
 }
 
 type AllWarehouseResponse {
-    warehouses: [Warehouse]
-    error: Error
+  warehouses: [Warehouse]
+  error: Error
 }
 
 type WarehouseResponse {
-    warehouse: Warehouse
-    error: Error
+  warehouse: Warehouse
+  error: Error
+}
+
+type ProductWHResponse {
+  success: Boolean!
+  error: Error
 }
 
 type Error {
-    message: String!
+  message: String!
 }
 
 input CreateWarehouseRequest {
-    name: String!
-    location: String!
+  name: String!
+  location: String!
 }
 
 input WarehouseRequest {
-    id: Int!
+  id: Int!
+}
+
+input ProductWHRequest {
+  idProduct: Int!
+  idWH: Int!
+  stock: Int!
+}
+
+input DeleteProductWHRequest {
+  idProduct: Int!
+  idWH: Int!
+}
+
+input UpdateWarehouseRequest {
+  id: Int!
+  name: String!
+  location: String!
 }
