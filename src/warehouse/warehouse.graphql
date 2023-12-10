@@ -1,6 +1,7 @@
 type Query {
   getWh(input: WarehouseRequest!): WarehouseResponse!
   getAllWh: AllWarehouseResponse!
+  getAllProductWh(input: AllProductWHRequest!): AllProductWHResponse!
 }
 
 type Mutation {
@@ -17,6 +18,11 @@ type Warehouse {
   location: String!
 }
 
+type ProductWH {
+  idProduct: String!
+  stock: Int!
+}
+
 type AllWarehouseResponse {
   warehouses: [Warehouse]
   error: Error
@@ -29,6 +35,11 @@ type WarehouseResponse {
 
 type ProductWHResponse {
   success: Boolean!
+  error: Error
+}
+
+type AllProductWHResponse {
+  products: [ProductWH]
   error: Error
 }
 
@@ -60,4 +71,8 @@ input UpdateWarehouseRequest {
   id: Int!
   name: String!
   location: String!
+}
+
+input AllProductWHRequest {
+  idWH: Int!
 }

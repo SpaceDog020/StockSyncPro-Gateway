@@ -2,7 +2,7 @@ import { Inject, OnModuleInit } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable, map } from 'rxjs';
-import { Warehouse, AllWarehouseResponse, WarehouseServiceClient, WarehouseResponse, WarehouseRequest, CreateWarehouseRequest, ProductWHRequest, ProductWHResponse, DeleteProductWHRequest, UpdateWarehouseRequest } from 'src/warehouse/warehouse.pb';
+import { Warehouse, AllWarehouseResponse, WarehouseServiceClient, WarehouseResponse, WarehouseRequest, CreateWarehouseRequest, ProductWHRequest, ProductWHResponse, DeleteProductWHRequest, UpdateWarehouseRequest, AllProductWHRequest, AllProductWHResponse } from 'src/warehouse/warehouse.pb';
 
 @Resolver('Warehouse')
 export class WarehouseResolver implements OnModuleInit {
@@ -24,6 +24,12 @@ export class WarehouseResolver implements OnModuleInit {
   getWh(@Args('input') input: WarehouseRequest): Observable<WarehouseResponse> {
     console.log('[.] getWh');
     return this.warehouseService.getWh(input);
+  }
+
+  @Query('getAllProductWh')
+  getAllProductWh(@Args('input') input: AllProductWHRequest): Observable<AllProductWHResponse> {
+    console.log('[.] getAllProductWh');
+    return this.warehouseService.getAllProductWh(input);
   }
 
   @Mutation('addWh')
