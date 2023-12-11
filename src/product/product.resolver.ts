@@ -2,7 +2,7 @@ import { Inject, OnModuleInit } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable, map } from 'rxjs';
-import { AddProductRequest, AddProductResponse, DeleteProductByIdRequest, DeleteProductByIdResponse, GetAllProductsResponse, ProductServiceClient, UpdateProductRequest, UpdateProductResponse, getProductByIdRequest, getProductByIdResponse } from './product.pb';
+import { AddProductRequest, AddProductResponse, DeleteProductByIdRequest, DeleteProductByIdResponse, GetAllProductsResponse, ProductServiceClient, UpdateProductRequest, UpdateProductResponse, getProductByIdRequest, getProductByIdResponse, getProductsByIdsRequest } from './product.pb';
 
 @Resolver('Product')
 export class ProductResolver implements OnModuleInit {
@@ -24,6 +24,12 @@ export class ProductResolver implements OnModuleInit {
     getProductById(@Args('input') input: getProductByIdRequest): Observable<getProductByIdResponse> {
         console.log('[.] getProductById');
         return this.productService.getProductById(input);
+    }
+
+    @Query('getProductsByIds')
+    getProductsByIds(@Args('input') input: getProductsByIdsRequest): Observable<GetAllProductsResponse> {
+        console.log('[.] getProductsByIds');
+        return this.productService.getProductsByIds(input);
     }
 
     @Mutation('addProduct')

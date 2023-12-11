@@ -1,6 +1,7 @@
 type Query {
     getProductById( input: getProductByIdRequest! ): getProductByIdResponse!
     getAllProducts: GetAllProductsResponse!
+    getProductsByIds( input: getProductsByIdsRequest! ): GetAllProductsResponse!
 }
 
 type Mutation{
@@ -20,9 +21,9 @@ type Product {
     price: Int!
 }
 
-
-
-
+input getProductsByIdsRequest {
+    ids: [String]!
+}
 
 input getProductByIdRequest {
     id: String!
