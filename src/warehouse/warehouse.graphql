@@ -57,13 +57,13 @@ input WarehouseRequest {
 }
 
 input ProductWHRequest {
-  idProduct: Int!
+  idProduct: String!
   idWH: Int!
   stock: Int!
 }
 
 input DeleteProductWHRequest {
-  idProduct: Int!
+  idProduct: String!
   idWH: Int!
 }
 
