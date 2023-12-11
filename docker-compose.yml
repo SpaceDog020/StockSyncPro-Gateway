@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  warehouse:
+    image: stocksyncpro-warehouse-app
+    ports:
+      - 5001:5001
+  product:
+    image: stocksyncpro-product-app
+    ports:
+      - 5002:5002
+  user:
+    image: stocksyncpro-user-app
+    ports:
+      - 5003:5003
+
+  api-gateway:
+    container_name: stocksyncpro-api-gateway
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - WAREHOUSE_GRPC_URL=host.docker.internal:5001
+      - PRODUCT_GRPC_URL=host.docker.internal:5002
+      - USER_GRPC_URL=host.docker.internal:5003
+    ports:
+      - 3000:3000
+
+    depends_on:
+      - warehouse
+      - product
+      - user
+
+    restart: on-failure
