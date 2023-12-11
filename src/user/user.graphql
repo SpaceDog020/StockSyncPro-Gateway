@@ -1,0 +1,26 @@
+type Error {
+  message: String!
+}
+
+input CredentialsRequest {
+  email: String!
+  password: String!
+}
+
+type RegisterUserResponse {
+  success: Boolean!
+  error: Error
+}
+
+type LoginUserResponse {
+  token: String
+  error: Error
+}
+
+type Mutation {
+  register(request: CredentialsRequest!): RegisterUserResponse!
+}
+
+type Query {
+    login(request: CredentialsRequest!): LoginUserResponse!
+}
