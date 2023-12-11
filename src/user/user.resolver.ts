@@ -12,7 +12,6 @@ export class UserResolver implements OnModuleInit {
     onModuleInit() {
         this.userService = this.client.getService<UserServiceClient>('UserService');
     }
-
     
     @Mutation('register')
     register(@Args('request') request: CredentialsRequest): Observable<RegisterUserResponse> {
@@ -23,5 +22,4 @@ export class UserResolver implements OnModuleInit {
     login(@Args('request') request: CredentialsRequest): Observable<LoginUserResponse> {  
       return this.userService.login(request);
     }
-    
 }
